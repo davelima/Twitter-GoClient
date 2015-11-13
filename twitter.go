@@ -12,7 +12,7 @@ func main() {
 		CONSUMER_KEY = ""
 		CONSUMER_SECRET = ""
 		ACCESS_TOKEN = ""
-		ACCESS_TOKEN_SECRET = ""	
+		ACCESS_TOKEN_SECRET = ""
 	)
 
 	args := os.Args
@@ -33,6 +33,22 @@ func main() {
 			} else {
 				fmt.Println("No tweet defined :(")
 			}
-	
+
+		case "last":
+			fmt.Println("Showing last tweets")
+
+			tweets, err := api.GetHomeTimeline(nil)
+
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			for index := range tweets {
+				fmt.Printf("%s: %s", tweets[index].User.Name, tweets[index].Text)
+				fmt.Println()
+				fmt.Println()
+				fmt.Println("-----")
+				fmt.Println()
+			}
 	}
 }
